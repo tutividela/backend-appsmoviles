@@ -1,0 +1,64 @@
+GET http://localhost:3000/families
+
+###
+
+GET http://modulo-imagenes.herokuapp.com/families/617990ee0fe4300ca4495def
+
+###
+
+POST http://localhost:3000/families
+Content-Type: application/json
+
+{
+    "apellido":"Rama",
+    "barrio": "Tigre"
+}
+
+###
+
+DELETE http://modulo-imagenes.herokuapp.com/families/617990ee0fe4300ca4495def
+
+###
+
+PATCH http://modulo-imagenes.herokuapp.com/families/617990ee0fe4300ca4495def
+Content-Type: application/json
+
+{
+    "name": "Riki"
+}
+
+###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GET http://modulo-backoffice.herokuapp.com/families/obtain-family/611c0d88feaa23e3c95cf062
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/families/obtain-families
+Content-Type: application/json
+
+###
+
+GET http://modulo-backoffice.herokuapp.com/families/obtain-families
