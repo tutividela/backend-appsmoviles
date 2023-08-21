@@ -14,11 +14,13 @@ db.once('open', () => console.log('Connected to Database'))
 
 app.use(express.json())
 
-const familyRouter = require('./routes/families')
-app.use('/families', familyRouter)
+const familyRouter = require('./routes/families');
+const encuestaRouter = require('./routes/encuestas.routes');
+app.use('/families', familyRouter);
+app.use('/encuestas', encuestaRouter);
 
 // Make sure images folder is publicly available
-app.use('/images', express.static('images'))
+app.use('/images', express.static('images'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}))

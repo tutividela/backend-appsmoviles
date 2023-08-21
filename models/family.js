@@ -60,7 +60,7 @@ const FamilySchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Family', FamilySchema)
+module.exports = mongoose.model('Family', FamilySchema, 'families')
 
 /*Fotos Pre CC:
 - Croquis encuesta 1 (vivienda, terreno y obstáculos constructivos).
