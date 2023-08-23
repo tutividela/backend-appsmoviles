@@ -3,16 +3,16 @@ if(process.env.NODE_ENV !== 'production'){
 }
 
 const express = require('express')
-const bodyParser = require('body-parser')
-const app = express()
-const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
+const app = express();
+const mongoose = require('mongoose');
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser:true,useUnifiedTopology: true })
-const db = mongoose.connection
-db.on('error', (error) => console.error(error))
-db.once('open', () => console.log('Connected to Database'))
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser:true,useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on('error', (error) => console.error(error));
+db.once('open', () => console.log('Connected to Database'));
 
-app.use(express.json())
+app.use(express.json());
 
 const familyRouter = require('./routes/families');
 const encuestaRouter = require('./routes/encuestas.routes');
@@ -23,6 +23,6 @@ app.use('/encuestas', encuestaRouter);
 app.use('/images', express.static('images'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}))
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}));
 
-app.listen(process.env.PORT || 3000, () => console.log('Server started'))
+app.listen(process.env.PORT || 3000, () => console.log('Server started'));

@@ -2,7 +2,6 @@ const Family = require('../models/family');
 const familyRepository =  require('../repositories/family.repository');
 const exifr = require('exifr');
 const {categories} = require('../utils/types');
-const fs = require('fs');
 
 const getAllFamilies = async (req, res) => {
     const category = req.headers.category;

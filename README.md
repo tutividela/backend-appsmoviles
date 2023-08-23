@@ -5,7 +5,6 @@ Brinda soporte a la aplicación realizada por el grupo 2.
 Consideraciones y puntos fuertes del proyecto:
 - Las imagenes se guardan en el file system.
 - Se ofrece la funcionalidad de poder guardar varias fotos por categoría.
-- Login seguro con la cuenta de Google.
 - Vista amigable de las fotos.
 - Permite subida tanto de fotos con geolocalización como sin.
 - Filtros funcionales para filtrar familias entre Apellido, Barrio, Partido, Provincia.

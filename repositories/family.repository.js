@@ -22,7 +22,7 @@ const guardarImagen = async (imagenData) =>{
 
 const borrarImagen = async (imagenData) => {
     let image;
-    return await Family.findOne({ familyId: imagenData.familyId }).then(family => {
+    return await Family.findOne({ familyId: imagenData.familyId }).then(async family => {
         switch (imagenData.category) {
             case categories.PreCC_croquisE1: image = family.PreCC_croquisE1.id(imagenData.photoId); break ;
             case categories.PreCC_delanteCasa: image = family.PreCC_delanteCasa.id(imagenData.photoId); break ;
@@ -36,7 +36,7 @@ const borrarImagen = async (imagenData) => {
             case categories.PostCC_cartaCesionImagen: image = family.PostCC_cartaCesionImagen.id(imagenData.photoId); break ;
         }
         image.deleteOne();
-        family.save();
+        await family.save();
     
         fs.unlink('./images/'+imagenData.familyId+'/'+image.imageName, (err) => {
             if (err) throw err;

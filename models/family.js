@@ -60,20 +60,4 @@ const FamilySchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Family', FamilySchema, 'families')
-
-/*Fotos Pre CC:
-- Croquis encuesta 1 (vivienda, terreno y obstáculos constructivos).
-- Foto familia delante de la casa.
-- Baño actual. (obligatoria)
-·  Inodoro
-·  Pozo/balde
-- Contrato de asignación firmado.
-- Ficha inspección de pozos (incluye croquis con pozo y obstáculos
-constructivos)
-Post CC:
-- Módulo Sanitario por dentro
-- Familia dentro del MS terminado
-- Niños/as y adultos cepillándose los dientes/lavándose las manos dentro del MS
-- Foto carta de donación del MS
-- Foto carta cesión de imagen*/
+module.exports = mongoose.model('Family', FamilySchema, 'families');
