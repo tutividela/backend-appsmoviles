@@ -33,7 +33,7 @@ const FamilySchema = new mongoose.Schema({
   }],
 
   PostCC_modulo: [{
-    path: String,
+    imageName: String,
     latitude: Number,
     longitude: Number,
   }],
