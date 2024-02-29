@@ -1,10 +1,10 @@
 // // // Start Multer config // // //
-const multer = require('multer');
-const fs = require('fs');
+import multer, { diskStorage } from 'multer';
+import { mkdirSync } from 'fs';
 
-const storage = multer.diskStorage({
+const storage = diskStorage({
     destination: function (req, file, cb) {
-        fs.mkdirSync('images/'+req.params.familyId+'/', { recursive: true })
+        mkdirSync('images/'+req.params.familyId+'/', { recursive: true })
         cb(null, 'images/'+req.params.familyId)
     },
     filename: function (req, file, cb) {
@@ -21,7 +21,7 @@ const fileFilter = (req, file, cb) => {
     }
 }
 
-const upload = multer({ storage: storage, fileFilter: fileFilter, limits: { fileSize: 1024*1024*10 } })
+export const upload = multer({ storage: storage, fileFilter: fileFilter, limits: { fileSize: 1024*1024*10 } })
 // // // End Multer config // // //
-
-module.exports= {upload};
+/* 
+export default {upload}; */

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const EncuestaSchema = new mongoose.Schema({
+const EncuestaSchema = new Schema({
     encuestaUno: {
         direccion: {
             partido: String,
@@ -12,4 +12,4 @@ const EncuestaSchema = new mongoose.Schema({
     apellido: String,
 });
 
-module.exports = mongoose.model('Encuesta', EncuestaSchema, 'Encuesta');
+export default model('Encuesta', EncuestaSchema, 'Encuesta');

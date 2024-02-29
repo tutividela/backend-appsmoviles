@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const encuestaController = require('../controllers/encuesta.controller');
+import { Router } from 'express';
+const router = Router();
+import encuestaController from '../controllers/encuesta.controller.js';
 
 router.get('/', encuestaController.getEncuestas);
 
-module.exports = router;
+export default router;

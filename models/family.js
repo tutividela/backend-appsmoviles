@@ -1,7 +1,7 @@
   
-const mongoose = require('mongoose')
+import { Schema, model } from 'mongoose';
 
-const FamilySchema = new mongoose.Schema({
+const FamilySchema = new Schema({
   
   familyId: String,
 
@@ -59,5 +59,6 @@ const FamilySchema = new mongoose.Schema({
   }],
 
 })
+const FamilyModel = model('Family', FamilySchema, 'families');
 
-module.exports = mongoose.model('Family', FamilySchema, 'families');
+export default FamilyModel;

@@ -1,6 +1,7 @@
-const Encuesta = require('../models/encuesta');
-const obtenerEncuestas = async () => {
+import Encuesta from '../models/encuesta.js';
+
+export const obtenerEncuestas = async () => {
     return await Encuesta.find({});
 }
-
-module.exports={obtenerEncuestas}
+/* 
+export default{obtenerEncuestas} */
