@@ -8,7 +8,7 @@ const { parse } = pkg;
 const getAllFamilies = async (req, res) => {
     const category = req.headers.category;
     try {
-        const families = await find({}, category)
+        const families = await FamilyModel.find({}, category)
         res.status(200).json(families)
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -38,8 +38,8 @@ const saveOneFamilyPicture = async (req, res) => {
     const successMessage = 'Picture from '+category+' saved successfully';
     const errorMessage = 'Error uploading image';
     const exifTotal = await parse(file.path);
-    const latitude = exifTotal.latitude ? exifTotal.latitude : null;
-    const longitude = exifTotal.longitude ? exifTotal.longitude : null;
+    const latitude = exifTotal?.latitude? exifTotal.latitude : null;
+    const longitude = exifTotal?.longitude ? exifTotal.longitude : null;
 
     const imagenData = {familyId: familyId, category: category, file: file, latitude: latitude, longitude: longitude};
 
