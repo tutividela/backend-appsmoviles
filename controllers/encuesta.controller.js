@@ -1,7 +1,8 @@
-const encuestaRepository = require('../repositories/encuesta.repository');
+import { obtenerEncuestas } from '../repositories/encuesta.repository.js';
+
 const getEncuestas = async (req, res) => {
     try {
-        const encuestas = await encuestaRepository.obtenerEncuestas();
+        const encuestas = await obtenerEncuestas();
         console.log(encuestas);
         res.status(200).json(encuestas);
     }catch(err) {
@@ -9,4 +10,4 @@ const getEncuestas = async (req, res) => {
     }
 }
 
-module.exports = {getEncuestas}
+export default {getEncuestas}

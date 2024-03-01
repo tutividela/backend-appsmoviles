@@ -1,6 +1,6 @@
-const {categories} = require('../utils/types');
-const Family = require('../models/family');
-const fs = require('fs');
+import { categories } from '../utils/types.js';
+import Family from '../models/family.js';
+import { unlink } from 'fs';
 
 const guardarImagen = async (imagenData) =>{
     return await Family.findOne({ familyId:imagenData.familyId }).then(family => {
@@ -38,11 +38,11 @@ const borrarImagen = async (imagenData) => {
         image.deleteOne();
         await family.save();
     
-        fs.unlink('./images/'+imagenData.familyId+'/'+image.imageName, (err) => {
+        unlink('./images/'+imagenData.familyId+'/'+image.imageName, (err) => {
             if (err) throw err;
             console.log('Imagen eliminada de filesystem');
         });
     });
 }
 
-module.exports = {guardarImagen, borrarImagen}
+export {guardarImagen, borrarImagen}

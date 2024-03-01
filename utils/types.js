@@ -1,4 +1,4 @@
-const categories = {
+export const categories = {
     PreCC_croquisE1:'PreCC_croquisE1' , 
     PreCC_delanteCasa:'PreCC_delanteCasa', 
     PreCC_bano: 'PreCC_bano',
@@ -10,5 +10,3 @@ const categories = {
     PostCC_cartaDonacion:'PostCC_cartaDonacion',
     PostCC_cartaCesionImagen:'PostCC_cartaCesionImagen'
 };
-
-module.exports = {categories}
