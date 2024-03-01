@@ -1,9 +1,9 @@
 import FamilyModel from '../models/family.js';
 import { guardarImagen, borrarImagen } from '../repositories/family.repository.js';
-import pkg from 'exifr';
+import exifr from 'exifr';
 import { categories } from '../utils/types.js';
 
-const { parse } = pkg;
+const { parse } = exifr;
 
 const getAllFamilies = async (req, res) => {
     const category = req.headers.category;

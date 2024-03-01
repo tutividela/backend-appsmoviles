@@ -1,7 +1,8 @@
 import { Router } from 'express';
-const router = Router();
 import familyController from '../controllers/family.controller.js';
 import { upload } from '../utils/multer.js';
+
+const router = Router();
 
 router.get('/', familyController.getAllFamilies);
 router.get('/:familyId', familyController.getOneFamily);

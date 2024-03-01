@@ -2,9 +2,7 @@
 import { Schema, model } from 'mongoose';
 
 const FamilySchema = new Schema({
-  
   familyId: String,
-
   // Censo Construccion
   PreCC_croquisE1: [{
     imageName: String,

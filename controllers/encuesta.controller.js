@@ -1,4 +1,5 @@
 import { obtenerEncuestas } from '../repositories/encuesta.repository.js';
+
 const getEncuestas = async (req, res) => {
     try {
         const encuestas = await obtenerEncuestas();

@@ -1,11 +1,12 @@
 import express, { json } from 'express';
-import pkg1 from 'body-parser';
-const { json: _json, urlencoded } = pkg1;
+import bodyParser from 'body-parser';
 import familyRouter from './routes/families.js';
 import encuestaRouter from './routes/encuestas.routes.js';
-import pkg2 from 'mongoose';
-const { connect, connection } = pkg2;
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+
+const { connect, connection } = mongoose;
+const { json: _json, urlencoded } = bodyParser;
 
 if(process.env.NODE_ENV !== 'production'){
     dotenv.config();
