@@ -2,6 +2,7 @@
 Back end del proyecto de aplicaciones móviles.
 Brinda soporte a la aplicación realizada por el grupo 2.
 
+
 Consideraciones y puntos fuertes del proyecto:
 - Las imagenes se guardan en el file system.
 - Se ofrece la funcionalidad de poder guardar varias fotos por categoría.
