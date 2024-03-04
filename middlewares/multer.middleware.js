@@ -10,4 +10,5 @@ export function validateUploadFile(req, res, next) {
     }
   };
   uploadFileErrorHandler(req.fileValidationError, req, res, next);
+  next();
 }
