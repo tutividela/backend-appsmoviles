@@ -55,7 +55,7 @@ const saveOneFamilyPicture = async (req, res) => {
   }
   try {
     await guardarImagen(imagenData);
-    return res.status(204);
+    return res.status(204).end();
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
