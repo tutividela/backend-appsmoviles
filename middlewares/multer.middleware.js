@@ -7,8 +7,9 @@ export function validateUploadFile(req, res, next) {
     }
     if (error) {
       next(error);
+    }else {
+      next();
     }
   };
   uploadFileErrorHandler(req.fileValidationError, req, res, next);
-  next();
 }
