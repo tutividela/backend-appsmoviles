@@ -1,74 +1,92 @@
-const Family = require('../models/family');
-const familyRepository =  require('../repositories/family.repository');
-const exifr = require('exifr');
-const {categories} = require('../utils/types');
+import FamilyModel from "../models/family.js";
+import {
+  guardarImagen,
+  borrarImagen,
+} from "../repositories/family.repository.js";
+import exifr from "exifr";
+import { categories } from "../utils/types.js";
+const { parse } = exifr;
 
 const getAllFamilies = async (req, res) => {
+  try {
     const category = req.headers.category;
-    try {
-        const families = await Family.find({}, category)
-        res.status(200).json(families)
-    } catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-}
+    const families = await FamilyModel.find({}, category);
+
+    return res.status(200).json(families);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 const getOneFamily = async (req, res) => {
+  try {
     let family;
     const familyId = req.params.familyId;
-    const category = req.header.category;
-    try{
-        family = await Family.findOne({ familyId: familyId }, category)
-        if(family == null){
-            res.status(404).json({ message: 'Cannot find family' });
-            return;
-        }
-        res.status(200).json(family);
-    }catch(err){
-        res.status(500).json({ message: err.message })
+    const category = req.headers["category"];
+    
+    family = await FamilyModel.findOne({ familyId: familyId }, category);
+    if (!family) {
+      return res.status(404).json({ message: "Familia no encontrada" });
     }
-}
+    return res.status(200).json(family);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 
 const saveOneFamilyPicture = async (req, res) => {
-    const file = req.file;
-    const familyId = req.params.familyId;
-    const category = req.body.category;
-    const successMessage = 'Picture from '+category+' saved successfully';
-    const errorMessage = 'Error uploading image';
-    const exifTotal = await exifr.parse(file.path);
-    const latitude = exifTotal.latitude ? exifTotal.latitude : null;
-    const longitude = exifTotal.longitude ? exifTotal.longitude : null;
+  const file = req.file;
+  const familyId = req.params.familyId;
+  const category = req.body.category;
+  const exifTotal = await parse(file.path);
+  const latitude = exifTotal?.latitude ? exifTotal.latitude : null;
+  const longitude = exifTotal?.longitude ? exifTotal.longitude : null;
+  const imagenData = {
+    familyId: familyId,
+    category: category,
+    file: file,
+    latitude: latitude,
+    longitude: longitude,
+  };
 
-    const imagenData = {familyId: familyId, category: category, file: file, latitude: latitude, longitude: longitude};
+  if (!categories[category]) {
+    return res.status(400).json({ message: 'La categoria no fue especificada' });
+  }
+  try {
+    await guardarImagen(imagenData);
 
-    if (!categories[category]){
-        res.status(400).json({ message: errorMessage });
-        return;
-    }
-    try{
-        await familyRepository.guardarImagen(imagenData);
-        res.status(200).json({ message: successMessage });
-    }catch(err){
-        res.status(500).json({message: err.message});
-    }
+    return res.status(204).end();
+  } catch (err) {
+    console.log("Error en guardarImagen: ", err);
 
-}
+    return res.status(500).json({ message: err.message });
+  }
+};
 
 const removeOneFamilyPicture = async (req, res) => {
-    const {familyId, category, photoId} = req.params;
-    const successMessage = 'Picture from '+category+' deleted successfully';
-    const errorMessage = 'Error deleting image';
+  const { familyId, category, photoId } = req.params;
 
-    if (!categories[category]) {
-        res.status(400).json({ message: errorMessage });
-    }
-    try{
-        await familyRepository.borrarImagen({familyId: familyId, category: category, photoId: photoId})
-        res.status(200).json({ message: successMessage });
-    } catch(err){
-        res.status(500).json({message: err.message})
-    }               
+  if (!categories[category]) {
+    return res.status(400).json({ message: 'La categoria no fue especificada' });
+  }
+  try {
+    await borrarImagen({
+      familyId: familyId,
+      category: category,
+      photoId: photoId,
+    });
+    
+    return res.status(204).end();
+  } catch (err) {
+    console.log("Error en borrarImagen: ", err);
 
-}
+    return res.status(500).json({ message: err.message });
+  }
+};
 
-module.exports = {getAllFamilies, getOneFamily, saveOneFamilyPicture, removeOneFamilyPicture}
+export default {
+  getAllFamilies,
+  getOneFamily,
+  saveOneFamilyPicture,
+  removeOneFamilyPicture,
+};
