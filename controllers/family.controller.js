@@ -11,9 +11,10 @@ const getAllFamilies = async (req, res) => {
   try {
     const category = req.headers.category;
     const families = await FamilyModel.find({}, category);
-    res.status(200).json(families);
+
+    return res.status(200).json(families);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -22,14 +23,14 @@ const getOneFamily = async (req, res) => {
     let family;
     const familyId = req.params.familyId;
     const category = req.header.category;
+
     family = await FamilyModel.findOne({ familyId: familyId }, category);
     if (family == null) {
-      res.status(404).json({ message: "Cannot find family" });
-      return;
+      return res.status(404).json({ message: "Familia no encontrada" });
     }
-    res.status(200).json(family);
+    return res.status(200).json(family);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 };
 
@@ -50,14 +51,13 @@ const saveOneFamilyPicture = async (req, res) => {
   const errorMessage = 'Error uploading image';
 
   if (!categories[category]) {
-    res.status(400).json({ message: errorMessage });
-    return;
+    return res.status(400).json({ message: errorMessage });
   }
   try {
     await guardarImagen(imagenData);
-    res.status(204).end();
+    return res.status(204);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 };
 
@@ -74,9 +74,10 @@ const removeOneFamilyPicture = async (req, res) => {
       category: category,
       photoId: photoId,
     });
-    res.status(204);
+    
+    return res.status(204);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 };
 

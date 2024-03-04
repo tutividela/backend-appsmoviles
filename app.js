@@ -4,6 +4,7 @@ import familyRouter from "./routes/families.routes.js";
 import encuestaRouter from "./routes/encuestas.routes.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 const { connect, connection } = mongoose;
 const { json: _json, urlencoded } = bodyParser;
@@ -31,5 +32,6 @@ app.use("/images", express.static("images"));
 
 app.use(_json());
 app.use(urlencoded({ limit: "10mb", extended: false }));
+app.use(errorHandler);
 
 app.listen(process.env.PORT || 3000, () => console.log("Server started"));

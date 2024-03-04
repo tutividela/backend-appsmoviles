@@ -1,12 +1,13 @@
 import { obtenerEncuestas } from "../repositories/encuesta.repository.js";
 
-const getEncuestas = async (req, res) => {
+const getEncuestas = async (req, res, next) => {
   try {
     const encuestas = await obtenerEncuestas();
-    console.log(encuestas);
+
     res.status(200).json(encuestas);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(err);
+    //res.status(500).json({ message: err.message });
   }
 };
 
