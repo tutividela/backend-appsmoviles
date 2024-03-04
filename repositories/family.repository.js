@@ -123,7 +123,7 @@ const borrarImagen = async (imagenData) => {
 
       unlink(
         "./images/" + imagenData.familyId + "/" + image.imageName,
-        (err) => {
+        function(err) {
           if (err) throw err;
           console.log("Imagen eliminada de filesystem");
         }

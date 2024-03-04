@@ -22,10 +22,10 @@ const getOneFamily = async (req, res) => {
   try {
     let family;
     const familyId = req.params.familyId;
-    const category = req.header.category;
-
+    const category = req.headers["category"];
+    
     family = await FamilyModel.findOne({ familyId: familyId }, category);
-    if (family == null) {
+    if (!family) {
       return res.status(404).json({ message: "Familia no encontrada" });
     }
     return res.status(200).json(family);
@@ -48,25 +48,26 @@ const saveOneFamilyPicture = async (req, res) => {
     latitude: latitude,
     longitude: longitude,
   };
-  const errorMessage = 'Error uploading image';
 
   if (!categories[category]) {
-    return res.status(400).json({ message: errorMessage });
+    return res.status(400).json({ message: 'La categoria no fue especificada' });
   }
   try {
     await guardarImagen(imagenData);
+
     return res.status(204).end();
   } catch (err) {
+    console.log("Error en guardarImagen: ", err);
+
     return res.status(500).json({ message: err.message });
   }
 };
 
 const removeOneFamilyPicture = async (req, res) => {
   const { familyId, category, photoId } = req.params;
-  const errorMessage = "Error deleting image";
 
   if (!categories[category]) {
-    res.status(400).json({ message: errorMessage });
+    return res.status(400).json({ message: 'La categoria no fue especificada' });
   }
   try {
     await borrarImagen({
@@ -75,8 +76,10 @@ const removeOneFamilyPicture = async (req, res) => {
       photoId: photoId,
     });
     
-    return res.status(204);
+    return res.status(204).end();
   } catch (err) {
+    console.log("Error en borrarImagen: ", err);
+
     return res.status(500).json({ message: err.message });
   }
 };
