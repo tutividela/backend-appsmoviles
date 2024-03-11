@@ -7,7 +7,6 @@ const getEncuestas = async (req, res, next) => {
     res.status(200).json(encuestas);
   } catch (err) {
     next(err);
-    //res.status(500).json({ message: err.message });
   }
 };
 
